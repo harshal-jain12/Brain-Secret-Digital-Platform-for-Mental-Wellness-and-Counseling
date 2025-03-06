@@ -1,0 +1,170 @@
+/* General Styles */
+/* body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f8f9fa;
+  } */
+  
+  .mental-health-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Header Section */
+  header {
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    color: #4A4A92;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  /* Test Circles Section */
+  .tests-section {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .tests-section h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 35px;
+    justify-items: center;
+  }
+  
+  .test-circle {
+    width: 170px;
+    height: 170px;
+    background-color: #d2e9e6;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.3s;
+  }
+  
+  .test-circle:hover {
+    transform: scale(1.1);
+    background-color: #ee82e7;
+  }
+  
+  /* View More/View Fewer Button */
+  .toggle-tests {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #4A4A92;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .toggle-tests:hover {
+    background-color: #6b6bc1;
+  }
+  
+
+  /* Mental Health Resources Section */
+  .mental-health-container {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .column {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    margin-left: 20px;
+  }
+  
+  li {
+    font-size: 16px;
+  }
+
+
+
+
+  /* FAQ Section */
+  .faq-section {
+    margin-top: 50px;
+  }
+  
+  .faq-section h2 {
+    font-size: 1.8rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .faq-list {
+    margin-top: 20px;
+  }
+  
+  .faq-item {
+    margin-bottom: 15px;
+  }
+  
+  .faq-question {
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .faq-question:hover {
+    background-color: #e9ecef;
+  }
+  
+  .faq-answer {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-left: 3px solid #4A4A92;
+    border-radius: 5px;
+    font-size: 0.95rem;
+  }
+  

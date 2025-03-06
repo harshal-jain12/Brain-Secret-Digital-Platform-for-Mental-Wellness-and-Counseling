@@ -1,0 +1,203 @@
+body {
+  font-family: "Funnel Display", serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfaf6;
+  }
+  
+  .about-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+  
+  .text-content {
+    flex: 1;
+    max-width: 600px;
+    padding: 20px;
+  }
+  
+  .text-content h1 {
+    font-size: 2.5em;
+    color: #f47c20;
+    margin-bottom: 10px;
+  }
+  
+  .text-content h2 {
+    font-size: 2em;
+    color: #003366;
+    margin-bottom: 20px;
+  }
+  
+  .text-content p {
+    font-size: 1.2em;
+    line-height: 1.8em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .text-content a {
+    color: #f47c20;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .profile {
+    flex: 1;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profile img {
+    width: 100%;
+    height: 420px;
+    border-radius: 10px;
+  }
+  
+  .profile h3 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #003366;
+  }
+  
+  .profile p {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  .profile a {
+    color: #f47c20;
+    font-size: 1.5em;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .values-section {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .values-section h2 {
+    color: #003366;
+    margin-bottom: 10px;
+  }
+  
+  .values-section p {
+    color: #2e4756;
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .values-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .value-box {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  .value-box img {
+    width: 75px;
+    margin-bottom: 15px;
+  }
+  
+  .value-box h3 {
+    color: #f47c20;
+    margin-bottom: 10px;
+  }
+  
+  .value-box p {
+    color: #2e4756;
+    font-size: 1em;
+    line-height: 1.5em;
+  }
+  
+
+  
+  /* How it works */
+  
+  .how-it-works {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+  }
+  
+  .how-it-works h2 {
+    font-size: 36px;
+    color: #003366;
+    margin-bottom: 10px;
+  }
+  
+  .how-it-works p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+ 
+
+
+
+  .steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  .step {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .step img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .step-content {
+    max-width: 70%;
+  }
+  
+  .step-content h3 {
+    font-size: 20px;
+    color: #003366;
+    margin-bottom: 5px;
+  }
+  
+  .step-content p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* .get-started {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+   */

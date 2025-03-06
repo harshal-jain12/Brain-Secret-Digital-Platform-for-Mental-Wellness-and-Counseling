@@ -1,0 +1,130 @@
+   /* General Container */
+.appointment-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f4f7fb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Heading Styles */
+.appointment-container h2 {
+  text-align: center;
+  color: #2d3748;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.appointment-form-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.appointment-form-header p {
+  color: #667085;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.form-icon {
+  width: 45%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+/* Form Labels */
+.appointmentform-label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Input Styles */
+.appointmentform-input,
+.appointmentform-select,
+.appointmentform-textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.appointmentform-textarea {
+  height: 120px;
+}
+
+/* Select Box Styling */
+.appointmentform-select {
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+
+/* Button Styles */
+.appointment-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 25px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.appointment-button:hover {
+  background-color: #45a049;
+}
+
+/* Focused State for Inputs */
+.appointmentform-input:focus,
+.appointmentform-select:focus,
+.appointmentform-textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .appointment-container {
+    padding: 20px;
+  }
+
+  .appointment-container h2 {
+    font-size: 24px;
+  }
+}
+
+/* Adding Soft Background Image to the Form Container */
+.appointment-container {
+  background: linear-gradient(135deg, #e9f7ef, #f4f7fb);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Custom Scrollbars for Textarea */
+.appointmentform-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.appointmentform-textarea::-webkit-scrollbar-thumb {
+  background-color: #4CAF50;
+  border-radius: 6px;
+}
+
+.appointmentform-textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+

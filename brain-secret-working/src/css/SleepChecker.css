@@ -1,0 +1,83 @@
+/* General styles */
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+} */
+
+.SleepQuality{
+    margin: 100px;
+}
+
+
+/* Sleep Checker Container */
+.sleep-checker-container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styling */
+.sleep-checker-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Labels */
+.SleepQuality label {
+    font-weight: bold;
+    color: #333;
+    margin: 5px;
+}
+
+/* Input fields */
+.SleepQuality input, select {
+    width: 80%;
+    display: block;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit Button */
+.SleepQuality button {
+    margin: 25px;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.SleepQuality button:hover {
+    background-color: #45a049;
+}
+
+/* Result Section */
+.sleep-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e3f2fd;
+    border-left: 5px solid #2196F3;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .sleep-checker-container {
+        width: 90%;
+        padding: 15px;
+    }
+}
