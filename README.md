@@ -46,31 +46,33 @@ Brain Secret is a full-stack digital platform designed to support mental wellnes
    git clone https://github.com/your-username/brain-secret.git
 
 
-
  ## Configure MySQL Database in application.properties.
-###📌 API Endpoints
-####Method	Endpoint	Description
-GET	/api/users	Fetch all users
-POST	/api/auth/register	Register a new user
-POST	/api/auth/login	User login
-GET	/api/counseling/sessions	Get available counseling sessions
+###📌 API Endpoints 
+####Method	Endpoint	Description 
+GET	/api/users	Fetch all users 
+POST	/api/auth/register	Register a new user 
+POST	/api/auth/login	User login 
+GET	/api/counseling/sessions	Get available counseling sessions 
 (More endpoints will be added as the project progresses.)
 
-##🔐 Security & Authentication
+##🔐 Security & Authentication 
 Uses JWT Authentication for secure login/logout.
 Encrypted passwords stored in MySQL.
-Role-based access control (Admin, Counselor, User).
-##💡 Future Enhancements
+Role-based access control (Admin, Counselor, User). 
+
+##💡 Future Enhancements 
 AI-based mental health insights
 Chatbot for quick counseling guidance
 Mobile App version
+
 ##📜 License
 This project is licensed under the MIT License.
 
 ##🤝 Contribution
 Contributions are welcome! Please follow these steps:
 
-## Fork the repo
+## Fork the repo 
+
 Create a new branch (git checkout -b feature-name)
 Commit changes (git commit -m "Added new feature")
 Push the branch (git push origin feature-name)
