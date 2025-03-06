@@ -48,7 +48,7 @@ Brain Secret is a full-stack digital platform designed to support mental wellnes
 
 
  ## Configure MySQL Database in application.properties.
-📌### API Endpoints
+###📌 API Endpoints
 ####Method	Endpoint	Description
 GET	/api/users	Fetch all users
 POST	/api/auth/register	Register a new user
