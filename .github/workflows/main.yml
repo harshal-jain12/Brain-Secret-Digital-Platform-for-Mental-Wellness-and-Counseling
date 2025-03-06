@@ -1,0 +1,23 @@
+name: Auto-Commit and Push
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # Runs every 10 minutes
+
+jobs:
+  auto-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "harshal-jain12"
+          git config --global user.email "harshalgosavi334@gmail.com"
+
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "Auto-update from GitHub Actions" || echo "No changes to commit"
+          git push
