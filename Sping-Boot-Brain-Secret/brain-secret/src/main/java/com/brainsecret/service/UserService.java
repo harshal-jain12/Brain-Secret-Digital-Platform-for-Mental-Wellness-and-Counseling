@@ -1,3 +1,33 @@
+package com.brainsecret.service;
+
+import com.brainsecret.entity.User;
+import com.brainsecret.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // ✅ Register a new user
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
+
+    // ✅ Get all users
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+}
+
+
+
 //package com.brainsecret.service;
 //
 //import com.brainsecret.entity.User;

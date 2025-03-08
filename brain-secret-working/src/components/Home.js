@@ -317,7 +317,7 @@ const Home = () => {
               </ul>
               {/* <h5 style={{fontWeight: "bold", textAlign: "center", fontSize:"26px", paddingBottom: "25px",  }}>Rs. 3999 </h5> */}
               
-              <a href="/signup" className="plans-btn">
+              <a href="/login" className="plans-btn">
                 Get Free Service
               </a>
             </div>
@@ -365,7 +365,9 @@ const Home = () => {
               {/* <a href="/payment" className="plans-btn">
                 Buy Premium plan
               </a> */}
-              <button className="plans-btn" onClick={handlePayment}>Buy Premium Plan</button>
+              <button className="plans-btn" onClick={handlePayment}> <a href="/login" className="plans-btn">
+              Buy Premium Plan
+              </a></button>
             </div>
 
           </div>

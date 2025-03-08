@@ -12,7 +12,6 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,30 +19,28 @@ export default function Login() {
       const response = await axios.post('http://localhost:8080/api/auth/login', formData, {
         headers: { 'Content-Type': 'application/json' },
       });
-  
+
       // Log full response to check the returned data
       console.log('Response from backend:', response.data);
-  
+
       const { token, role } = response.data;
-  
+
       if (!role) {
         setError('Role is missing from the server response.');
         return;
       }
-  
+
       if (token) {
-        // Store JWT token in local storage
-        localStorage.setItem('authToken', token);
+        // Store JWT token and role in local storage
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role.toUpperCase()); // Normalize role for consistency
         alert('Login successful!');
-  
-        // Normalize role to uppercase for consistent comparison
-        const normalizedRole = role.toUpperCase();
-  
+
         // Redirect based on role
-        if (normalizedRole === 'ADMIN') {
+        if (role.toUpperCase() === 'ADMIN') {
           navigate('/AdminDashboard');
-        } else if (normalizedRole === 'USER') {
-          navigate('/userDashboard');
+        } else if (role.toUpperCase() === 'USER') {
+          navigate('/dashboard'); // Corrected from '/userDashboard'
         } else {
           setError('Invalid user role.');
         }
@@ -54,82 +51,6 @@ export default function Login() {
       setError(err.response?.data?.message || 'Failed to login. Please check your credentials.');
     }
   };
-  
-
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Send POST request to login endpoint
-  //     const response = await axios.post('http://localhost:8080/api/auth/login', formData, {
-  //       headers: { 'Content-Type': 'application/json' },
-  //     });
-  
-  //     // Extract token and role from the response
-  //     const { token, role } = response.data;
-  
-  //     // Log the role for debugging
-  //     console.log('Role returned from backend:', role);
-  
-  //     if (token) {
-  //       // Store JWT token in local storage
-  //       localStorage.setItem('authToken', token);
-  //       alert('Login successful!');
-  
-  //       // Normalize role to uppercase for consistent comparison
-  //       const normalizedRole = role?.toUpperCase();
-  
-  //       // Redirect based on role
-  //       if (normalizedRole === 'ADMIN') {
-  //         navigate('/AdminDashboard'); // Ensure the route is correctly configured
-  //       } else if (normalizedRole === 'USER') {
-  //         navigate('/userDashboard');
-  //       } else {
-  //         setError('Invalid user role.'); // Fallback for unexpected roles
-  //       }
-  //     } else {
-  //       setError('Failed to retrieve authentication token.');
-  //     }
-  //   } catch (err) {
-  //     setError(err.response?.data?.message || 'Failed to login. Please check your credentials.');
-  //   }
-  // };
-  
-
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Send POST request to login endpoint
-  //     const response = await axios.post('http://localhost:8080/api/auth/login', formData, {
-  //       headers: { 'Content-Type': 'application/json' },
-  //     });
-  
-  //     // Extract token and role from the response
-  //     const { token, role } = response.data;
-  
-  //     if (token) {
-  //       // Store JWT token in local storage
-  //       localStorage.setItem('authToken', token);
-  //       alert('Login successful!');
-  
-  //       // Redirect based on role
-  //       if (role === 'ADMIN') {
-  //         navigate('/AdminDashboard'); // Ensure this route is correctly set up in your routing
-  //       } else if (role === 'USER') {
-  //         navigate('/userDashboard');
-  //       } else {
-  //         setError('Invalid user role.'); // Fallback for unexpected roles
-  //       }
-  //     } else {
-  //       setError('Failed to retrieve authentication token.');
-  //     }
-  //   } catch (err) {
-  //     setError(err.response?.data?.message || 'Failed to login. Please check your credentials.');
-  //   }
-  // };
-  
-  
 
   return (
     <div className="login_page">
@@ -168,7 +89,6 @@ export default function Login() {
     </div>
   );
 }
-
 
 
 

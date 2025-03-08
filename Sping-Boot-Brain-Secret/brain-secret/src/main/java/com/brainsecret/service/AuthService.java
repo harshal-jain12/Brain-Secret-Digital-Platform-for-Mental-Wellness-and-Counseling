@@ -1,34 +1,31 @@
 package com.brainsecret.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.brainsecret.entity.User;
 import com.brainsecret.repository.UserRepository;
-
 import java.util.Optional;
 import java.util.Date;
 import java.util.List;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
 
 @Service
 public class AuthService {
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    private static final String SECRET_KEY = "your_secret_key";
+    private static final String SECRET_KEY = "6Ld0nu0qAAAAAIeV0jbC9MbE5Iwa4GyooMSIaM4P";
     private static final long EXPIRATION_TIME = 86400000; // 24 hours
 
-    // Register a new user
+    // Register user
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
@@ -50,40 +47,116 @@ public class AuthService {
         try {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
             return true;
-        } catch (ExpiredJwtException e) {
-            System.err.println("Token expired: " + e.getMessage());
-        } catch (SignatureException | MalformedJwtException e) {
-            System.err.println("Invalid token: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Token validation error: " + e.getMessage());
+            return false;
         }
-        return false;
     }
 
-    // Extract user details from token
-    public Claims extractClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-    }
-
-    // Authenticate user and generate token if valid
-    public String login(String email, String password) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (passwordEncoder.matches(password, user.getPassword())) {
-                return generateToken(user);
-            }
-        }
-        throw new RuntimeException("Invalid email or password");
-    }
-    
- // Add this method to AuthService.java
+    // Get all users
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
-    
 }
+
+
+
+
+
+
+
+
+
+
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.stereotype.Service;
+//import com.brainsecret.entity.User;
+//import com.brainsecret.repository.UserRepository;
+//
+//import java.util.Optional;
+//import java.util.Date;
+//import java.util.List;
+//
+//import io.jsonwebtoken.Jwts;
+//import io.jsonwebtoken.SignatureAlgorithm;
+//import io.jsonwebtoken.Claims;
+//import io.jsonwebtoken.ExpiredJwtException;
+//import io.jsonwebtoken.MalformedJwtException;
+//import io.jsonwebtoken.SignatureException;
+//
+//@Service
+//public class AuthService {
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
+//
+//    private static final String SECRET_KEY = "your_secret_key";
+//    private static final long EXPIRATION_TIME = 86400000; // 24 hours
+//
+//    // Register a new user
+//    public User registerUser(User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        return userRepository.save(user);
+//    }
+//
+//    // Generate JWT Token
+//    public String generateToken(User user) {
+//        return Jwts.builder()
+//                .setSubject(user.getEmail())
+//                .claim("role", user.getRole())
+//                .setIssuedAt(new Date())
+//                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+//                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+//                .compact();
+//    }
+//
+//    // Validate JWT Token
+//    public boolean validateToken(String token) {
+//        try {
+//            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+//            return true;
+//        } catch (ExpiredJwtException e) {
+//            System.err.println("Token expired: " + e.getMessage());
+//        } catch (SignatureException | MalformedJwtException e) {
+//            System.err.println("Invalid token: " + e.getMessage());
+//        } catch (Exception e) {
+//            System.err.println("Token validation error: " + e.getMessage());
+//        }
+//        return false;
+//    }
+//
+//    // Extract user details from token
+//    public Claims extractClaims(String token) {
+//        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+//    }
+//
+//    // Authenticate user and generate token if valid
+//    public String login(String email, String password) {
+//        Optional<User> userOptional = userRepository.findByEmail(email);
+//        if (userOptional.isPresent()) {
+//            User user = userOptional.get();
+//            if (passwordEncoder.matches(password, user.getPassword())) {
+//                return generateToken(user);
+//            }
+//        }
+//        throw new RuntimeException("Invalid email or password");
+//    }
+//    
+// // Add this method to AuthService.java
+//    public List<User> getAllUsers() {
+//        return userRepository.findAll();
+//    }
+//
+//    
+//}
+
+
+
+
+
+
 
 
 //

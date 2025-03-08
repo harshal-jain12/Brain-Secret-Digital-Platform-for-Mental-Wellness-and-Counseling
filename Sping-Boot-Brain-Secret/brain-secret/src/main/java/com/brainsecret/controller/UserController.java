@@ -1,116 +1,201 @@
 package com.brainsecret.controller;
 
 import com.brainsecret.entity.User;
-import com.brainsecret.entity.LoginResponse;
-import com.brainsecret.entity.LoginRequest;
-import com.brainsecret.service.AuthService;
-//import com.brainsecret.service.UserService;
-import com.brainsecret.security.JwtUtils;
-import com.brainsecret.security.UserDetailsImpl;
-
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
+import com.brainsecret.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/user")
+@CrossOrigin(origins = "*")  // Adjust CORS policy as needed
 public class UserController {
 
-//    @Autowired
-//    private UserService userService;
-
     @Autowired
-   // @Lazy
-    private AuthService authService;
+    private UserRepository userRepository;
 
-    @Autowired
-    private JwtUtils jwtUtils;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
-        try {
-            authService.registerUser(user);
-            return ResponseEntity.ok("User registered successfully");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
-        }
+    // ✅ Get User Details by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.badRequest().build());  // Fixed issue
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                    loginRequest.getEmail(),
-                    loginRequest.getPassword()
-                )
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwt = jwtUtils.generateToken(authentication.getName());
-
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            String role = userDetails.getAuthorities().stream()
-                                     .findFirst()
-                                     .map(GrantedAuthority::getAuthority)
-                                     .orElse("USER");
-
-            LoginResponse response = new LoginResponse(jwt, role);
-            return ResponseEntity.ok().body(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-        }
-        try {
-            jwtUtils.blacklistToken(token);
-            return ResponseEntity.ok("User logged out successfully.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during logout.");
-        }
-    }
-
-    @GetMapping("/validate")
-    public ResponseEntity<String> validateToken(@RequestParam String token) {
-        boolean isValid = jwtUtils.validateToken(token);
-        if (isValid) {
-            return ResponseEntity.ok("Token is valid");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
-        }
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        try {
-            List<User> users = authService.getAllUsers();
-            return ResponseEntity.ok(users);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    // ✅ Update User Profile
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        return userRepository.findById(id).map(user -> {
+            user.setName(updatedUser.getName());
+            user.setPhone(updatedUser.getPhone());
+            user.setRole(updatedUser.getRole());
+            userRepository.save(user);
+            return ResponseEntity.ok("User updated successfully!");
+        }).orElseGet(() -> ResponseEntity.badRequest().body("User not found!"));
     }
 }
+
+
+
+
+
+
+
+
+
+//package com.brainsecret.controller;
+//
+//import com.brainsecret.entity.User;
+//import com.brainsecret.repository.UserRepository;
+//import com.brainsecret.entity.LoginResponse;
+//import com.brainsecret.entity.LoginRequest;
+//import com.brainsecret.service.AuthService;
+////import com.brainsecret.service.UserService;
+//import com.brainsecret.security.JwtUtils;
+//import com.brainsecret.security.UserDetailsImpl;
+//
+//import org.hibernate.validator.internal.util.stereotypes.Lazy;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.*;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//@RestController
+//@RequestMapping("/api/auth")
+//@CrossOrigin("*")
+//public class UserController {
+//
+////    @Autowired
+////    private UserService userService;
+//
+//	@Autowired
+//    private UserRepository userRepository;
+//
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+//	
+//    @Autowired
+//   // @Lazy
+//    private AuthService authService;
+//
+//    @Autowired
+//    private JwtUtils jwtUtils;
+//
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
+//
+//    @PostMapping("/register")
+//    public ResponseEntity<String> registerUser(@RequestBody User user) {
+//        try {
+//            authService.registerUser(user);
+//            return ResponseEntity.ok("User registered successfully");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+//        }
+//    }
+//    
+//    
+//    
+//    @PostMapping("/login")
+//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+//        Optional<User> optionalUser = userRepository.findByEmail(loginRequest.getEmail()); // Ensure using correct field
+//
+//        if (optionalUser.isPresent()) {
+//            User user = optionalUser.get();
+//
+//            // Verify password
+//            if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+//                String role = user.getRole();  // Retrieve user role
+//                String token = jwtUtils.generateToken(user.getEmail(), role);  // Fixed method call
+//
+//                return ResponseEntity.ok(new LoginResponse(token, role));  // Return token & role
+//            } else {
+//                return ResponseEntity.badRequest().body("Invalid credentials");
+//            }
+//        } else {
+//            return ResponseEntity.badRequest().body("User not found");
+//        }
+//    }
+//
+//    
+//
+////    @PostMapping("/login")
+////    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+////        try {
+////            Authentication authentication = authenticationManager.authenticate(
+////                new UsernamePasswordAuthenticationToken(
+////                    loginRequest.getEmail(),
+////                    loginRequest.getPassword()
+////                )
+////            );
+////
+////            SecurityContextHolder.getContext().setAuthentication(authentication);
+////            String jwt = jwtUtils.generateToken(authentication.getName());
+////
+////            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+////            String role = userDetails.getAuthorities().stream()
+////                                     .findFirst()
+////                                     .map(GrantedAuthority::getAuthority)
+////                                     .orElse("USER");
+////
+////            LoginResponse response = new LoginResponse(jwt, role);
+////            return ResponseEntity.ok().body(response);
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+////        }
+////    }
+//    
+//    
+//    
+//
+//    @PostMapping("/logout")
+//    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+//        if (token != null && token.startsWith("Bearer ")) {
+//            token = token.substring(7);
+//        }
+//        try {
+//            jwtUtils.blacklistToken(token);
+//            return ResponseEntity.ok("User logged out successfully.");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during logout.");
+//        }
+//    }
+//
+//    @GetMapping("/validate")
+//    public ResponseEntity<String> validateToken(@RequestParam String token) {
+//        boolean isValid = jwtUtils.validateToken(token);
+//        if (isValid) {
+//            return ResponseEntity.ok("Token is valid");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+//        }
+//    }
+//
+//    @GetMapping("/users")
+//    public ResponseEntity<List<User>> getAllUsers() {
+//        try {
+//            List<User> users = authService.getAllUsers();
+//            return ResponseEntity.ok(users);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//        }
+//    }
+//}
 
 
 
